@@ -1,0 +1,162 @@
+# README - Application Mobile Heyama (Expo)
+
+## 📱 Description
+Application mobile React Native avec Expo pour gérer des objets. Compatible iOS, Android et Web.
+
+## 🚀 Installation Rapide
+
+```bash
+# 1. Installer Expo CLI globalement
+npm install -g expo-cli
+
+# 2. Cloner et installer
+cd heyama-mobile
+npm install
+
+# 3. Installer les dépendances Expo
+npx expo install
+```
+
+## ⚙️ Configuration
+
+### Pour Android (Appareil physique ou émulateur)
+1. Trouvez votre adresse IP locale :
+   ```bash
+   # Windows
+   ipconfig
+   
+   # Mac/Linux
+   ifconfig | grep "inet "
+   ```
+
+2. Modifiez `src/lib/api.ts` :
+   ```javascript
+   const API_BASE_URL = 'http://VOTRE_IP:3001/api';
+   ```
+
+### Pour iOS Simulator
+Utilisez `http://localhost:3001/api`
+
+## ▶️ Lancement
+
+```bash
+# Développement général
+npm start
+
+# iOS spécifique
+npm run ios
+
+# Android spécifique
+npm run android
+
+# Web
+npm run web
+```
+
+## 📱 Test sur Appareil Physique
+
+1. Installez **Expo Go** depuis l'App Store ou Play Store
+2. Lancez l'application : `npm start`
+3. Scannez le QR code avec Expo Go
+
+## 📁 Structure du Projet
+
+```
+src/
+├── screens/
+│   ├── HomeScreen.tsx       # Liste des objets
+│   ├── CreateObjectScreen.tsx # Formulaire création
+│   ├── ObjectDetailScreen.tsx # Détails objet
+│   └── SettingsScreen.tsx   # Paramètres
+├── components/
+│   ├── common/              # Composants réutilisables
+│   └── objects/             # Composants objets
+├── contexts/                # États globaux
+├── navigation/              # Navigation React Navigation
+├── lib/                     # API et services
+└── hooks/                   # Hooks personnalisés
+```
+
+## 🔗 Configuration du Backend
+
+### Requirements
+- Backend NestJS tournant sur port 3001
+- MongoDB connecté
+- Socket.IO activé
+
+### Pour développement avec appareil physique :
+1. Backend doit être accessible sur votre réseau local
+2. Désactiver le firewall si nécessaire
+3. Utiliser votre IP locale (pas localhost)
+
+## 📸 Fonctionnalités Camera/Galerie
+
+L'application demande automatiquement les permissions pour :
+- Prendre des photos avec la caméra
+- Sélectionner des images depuis la galerie
+- Accéder au stockage pour cache
+
+## ⚡ Fonctionnalités Temps Réel
+
+- Mise à jour instantanée lors de l'ajout/suppression
+- Indicateur de connexion WebSocket
+- Reconnection automatique
+
+## 🛠️ Build pour Production
+
+```bash
+# Configuration EAS Build
+npx eas-cli init
+
+# Build pour Android
+npx eas build -p android
+
+# Build pour iOS (nécessite compte Apple Developer)
+npx eas build -p ios
+```
+
+## 🐛 Dépannage
+
+### Problème : "Network Error" sur Android
+**Solution :**
+1. Vérifiez que l'IP est correcte dans `src/lib/api.ts`
+2. Vérifiez que le backend est accessible depuis votre téléphone
+3. Testez avec : `ping VOTRE_IP` depuis l'ordinateur
+
+### Problème : Images non uploadées
+**Solution :**
+1. Vérifiez les permissions caméra/galerie
+2. Redémarrez l'application
+3. Vérifiez la taille des images (max 10MB recommandé)
+
+### Problème : Socket.IO non connecté
+**Solution :**
+1. Vérifiez que le backend a Socket.IO d'activé
+2. Redémarrez l'application mobile
+3. Vérifiez les logs du backend
+
+## 📱 Compatibilité
+
+- **iOS 13+** (avec Expo Go ou build standalone)
+- **Android 6+** (avec Expo Go ou build standalone)
+- **Web** (Chrome, Firefox, Safari)
+
+## 🔧 Scripts Utiles
+
+```bash
+# Nettoyer le cache
+npm start -- --clear
+
+# Lancer avec tunnel (pour réseaux restrictifs)
+npm start -- --tunnel
+
+# Voir les logs
+npm start -- --verbose
+```
+
+## 📞 Support
+
+Pour toute question :
+1. Vérifiez que le backend tourne
+2. Vérifiez votre connexion réseau
+3. Consultez les logs avec `npm start -- --verbose`

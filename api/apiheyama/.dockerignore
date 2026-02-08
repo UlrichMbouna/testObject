@@ -1,0 +1,23 @@
+# Dépendances (on laisse le conteneur les installer lui-même)
+node_modules
+npm-debug.log
+
+# Données locales (TRÈS IMPORTANT pour éviter les crashs de build et la lenteur)
+data/
+mongodb/
+.DS_Store
+
+# Logs et dossiers de build
+logs
+*.log
+npm-debug.log*
+dist/
+build/
+.cache/
+
+# Git
+.git
+.gitignore
+
+# Environnement (pour la sécurité, on ne les build pas dans l'image)
+.env
